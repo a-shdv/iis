@@ -2,7 +2,7 @@
   <div>
     <PageLayout>
       <v-card-title>
-        <h1>Классификация</h1>
+        <h1 style="color: #00DC82">Классификация</h1>
       </v-card-title>
       <v-card-text>
         <h2>Агломеративная кластеризация - 1</h2>
@@ -33,15 +33,14 @@ export default {
     this.$axios.get('api/calc_classes').then(res => {
       let data = JSON.parse(JSON.stringify(res.data))
       for (let [key, value] of Object.entries(data)) {
-        let y = [...Object.values(value.dict)].map(el => `${el} ${this.labelDict[key]}`)
-        console.log(y);
-
+        let plotTitles = [...Object.values(value.dict)].map(el => `${el} ${this.labelDict[key]}`)
+        let plotValues = [...Object.values(value.stat).map(el => `${el}`)]
+        let correlatedArray = plotTitles.map((title, index) => {
+          return {title, value: plotValues[index]};
+        });
         this.value = [...this.value, ...Object.values(value.stat)]
-        this.labels = [...this.labels, ...y]
-
+        this.labels = [...this.labels, ...correlatedArray.flatMap(obj => `${obj.title}: ${obj.value}`).sort()]
       }
-      console.log(this.value);
-      console.log(this.labels);
     }).catch(err => console.log(err))
   },
   components: {

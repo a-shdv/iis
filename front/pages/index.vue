@@ -2,14 +2,17 @@
   <div>
     <PageLayout>
       <v-card-title>
-        <h1>Данные об учениках</h1>
+        <h1 style="color: #00DC82">Статистика</h1>
       </v-card-title>
       <v-card-text>
-        <div class="text--primary">
-          <span><b>Минимальная сумма баллов:</b> {{ stat.min }}</span> <br>
-          <span><b>Максимальная сумма баллов:</b> {{ stat.max }}</span> <br>
-          <span><b>Средняя сумма баллов:</b> {{ stat.average }}</span> <br>
-          <span><b>Медианная сумма баллов:</b> {{ stat.median }}</span> <br>
+        <h2 class="mb-4" style="font-size: 24px;">Данные об учениках:</h2>
+        <div class="text--primary" style="font-size: 18px;">
+          <ul>
+            <li><h4>Минимальная сумма баллов: {{ stat.min }}</h4></li>
+            <li><h4>Максимальная сумма баллов: {{ stat.max }}</h4></li>
+            <li><h4>Средняя сумма баллов: {{ stat.average }}</h4></li>
+            <li><h4>Медианная сумма баллов: {{ stat.median }}</h4></li>
+          </ul>
         </div>
       </v-card-text>
     </PageLayout>

@@ -76,11 +76,11 @@ def calculate_class():
             min_val = val
     for key, val in kmeans_dict.items():
         if val == max_val:
-            kmeans_dict[key] = "Лучший класс"
+            kmeans_dict[key] = "Лучш. кл."
         elif val == min_val:
-            kmeans_dict[key] = "Худший класс"
+            kmeans_dict[key] = "Худш. кл."
         else:
-            kmeans_dict[key] = "Средний класс"
+            kmeans_dict[key] = "Ср. кл."
     # print(kmeans_dict)
 
     agg_clust.fit(corr.values)
@@ -99,11 +99,11 @@ def calculate_class():
             min_val = val
     for key, val in agg_clust_dict.items():
         if val == max_val:
-            agg_clust_dict[key] = "Лучший класс"
+            agg_clust_dict[key] = "Лучш. кл."
         elif val == min_val:
-            agg_clust_dict[key] = "Худший класс"
+            agg_clust_dict[key] = "Худш. кл."
         else:
-            agg_clust_dict[key] = "Средний класс"
+            agg_clust_dict[key] = "Ср. кл."
     # print(agg_clust_dict)
     counter_means = Counter(all_predict_kmeans)
     counter_agg = Counter(all_predict_agg)

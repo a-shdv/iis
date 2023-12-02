@@ -2,13 +2,17 @@
     <div>
         <PageLayout>
             <v-card-title>
-              <h1>Прогнозирование баллов</h1>
+              <h1 style="color: #00DC82">Прогнозирование баллов</h1>
             </v-card-title>
             <v-card-text>
                 <h2 class="mb-4">Ошибки алгоритмов MAPE:</h2>
-                <h3>mlp - MLPRegressor</h3>
-                <h3>tree - DecisionTreeRegressor</h3>
-                <h3>reg - LinearRegression</h3>
+              <div class="text--primary" style="font-size: 18px;">
+              <ul>
+                <li><h4>mlp - MLPRegressor</h4></li>
+                <li><h4>tree - DecisionTreeRegressor</h4></li>
+                <li><h4>reg - LinearRegression</h4></li>
+              </ul>
+              </div>
             </v-card-text>
             <v-sparkline :value="value" :gradient="gradient" :smooth="radius || false" :padding="padding"
                 :line-width="width" :stroke-linecap="lineCap" :gradient-direction="gradientDirection" :fill="fill"
@@ -35,8 +39,7 @@ export default {
             let data = JSON.parse(JSON.stringify(res.data))
             for (let [key, value] of Object.entries(data)) {
                 this.value = [...this.value, value]
-                this.labels = [...this.labels, `${key} ${(value * 100).toFixed(2)} %`]
-
+                this.labels = [...this.labels, `${key} ${(value * 100).toFixed(2)}%`]
             }
             console.log(this.value);
             console.log(this.labels);
