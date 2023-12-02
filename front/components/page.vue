@@ -11,7 +11,7 @@
     </v-card>
 </template>
 <script>
-import Menu from "@/components/Menu"
+import Menu from "~/components/sidebar.vue"
 export default {
     components: {
         Menu
@@ -19,5 +19,5 @@ export default {
 }
 </script>
 <style lang="">
-    
+
 </style>

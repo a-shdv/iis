@@ -19,13 +19,13 @@
     </div>
 </template>
 <script>
-import PageLayout from "@/components/PageLayout"
+import PageLayout from "~/components/page.vue"
 const gradients = [
     ['#222'],
-    ['#42b3f4'],
+    ['#00DC82'],
     ['red', 'orange', 'yellow'],
     ['purple', 'violet'],
-    ['#00c6ff', '#F0F', '#FF0'],
+    ['#00f096', '#F0F', '#FF0'],
     ['#f72047', '#ffd200', '#1feaea'],
 ]
 export default {
@@ -73,5 +73,5 @@ export default {
 }
 </script>
 <style lang="">
-    
+
 </style>

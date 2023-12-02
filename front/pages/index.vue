@@ -4,6 +4,7 @@
             <v-card-title>
                 Данные об учениках
             </v-card-title>
+
             <v-card-text>
                 <p class="text--primary"> Минимальная сумма баллов: {{ stat.min }}</p>
             </v-card-text>
@@ -20,7 +21,7 @@
     </div>
 </template>
 <script>
-import PageLayout from "~/components/PageLayout.vue"
+import PageLayout from "~/components/page.vue"
 export default {
     components: {
         PageLayout,
