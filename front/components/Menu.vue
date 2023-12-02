@@ -1,5 +1,5 @@
 <template>
-     <v-navigation-drawer
+     <v-navigation-drawer style="min-height: 100vh;"
         floating
         permanent
       >

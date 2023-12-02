@@ -1,5 +1,5 @@
 <template >
-    <v-card class="h-100">
+    <v-card class="h-100" style="min-height: 100vh">
         <v-row>
             <v-col class="col col-3">
                 <Menu />
@@ -11,7 +11,7 @@
     </v-card>
 </template>
 <script>
-import Menu from "~/components/sidebar.vue"
+import Menu from "~/components/Menu.vue"
 export default {
     components: {
         Menu

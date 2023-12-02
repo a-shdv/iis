@@ -2,7 +2,7 @@
     <div>
         <PageLayout>
             <v-card-title>
-                Прогнозирование баллов
+              <h1>Прогнозирование баллов</h1>
             </v-card-title>
             <v-card-text>
                 <h2 class="mb-4">Ошибки алгоритмов MAPE:</h2>
@@ -19,7 +19,7 @@
     </div>
 </template>
 <script>
-import PageLayout from "~/components/page.vue"
+import PageLayout from "~/components/PageLayout.vue"
 const gradients = [
     ['#222'],
     ['#00DC82'],
@@ -67,7 +67,7 @@ export default {
             gradients,
             fill: false,
             type: 'bar',
-            autoLineWidth: false,
+            autoLineWidth: true,
         }
     },
 }
