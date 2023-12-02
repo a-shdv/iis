@@ -35,11 +35,9 @@ export default {
       for (let [key, value] of Object.entries(data)) {
         let plotTitles = [...Object.values(value.dict)].map(el => `${el} ${this.labelDict[key]}`)
         let plotValues = [...Object.values(value.stat).map(el => `${el}`)]
-        let correlatedArray = plotTitles.map((title, index) => {
-          return {title, value: plotValues[index]};
-        });
+        let concatenatedArray = plotTitles.map((title, index) => { return {title, value: plotValues[index]}; });
         this.value = [...this.value, ...Object.values(value.stat)]
-        this.labels = [...this.labels, ...correlatedArray.flatMap(obj => `${obj.title}: ${obj.value}`).sort()]
+        this.labels = [...this.labels, ...concatenatedArray.flatMap(obj => `${obj.title}: ${obj.value}`).sort()]
       }
     }).catch(err => console.log(err))
   },
