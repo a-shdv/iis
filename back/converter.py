@@ -1,10 +1,11 @@
-from config import names
 import pandas as pd
+
 
 def gender_to_bool(gender):
     if gender == "male":
         return 1
     return 0
+
 
 def race_to_num(race):
     if race == "group A":
@@ -15,17 +16,20 @@ def race_to_num(race):
         return 2
     return 3
 
+
 def launch_to_bool(lunch):
     if lunch == "standard":
         return 1
     return 0
+
 
 def course_to_bool(course):
     if course == "completed":
         return 1
     return 0
 
-def levelToNum(level):
+
+def level_to_num(level):
     if level == "associate's degree":
         return 0
     elif level == "bachelor's degree":
@@ -38,15 +42,17 @@ def levelToNum(level):
         return 4
     return 5
 
-def totalScore(math, read, write):
+
+def total_score(math, read, write):
     return math + read + write
 
-def bring():
-    data = pd.read_csv('StudentsPerformance.csv')
+
+def convert_all_to_num():
+    data = pd.read_csv('students-performance.csv')
     data["lunch"] = data["lunch"].apply(launch_to_bool)
     data["gender"] = data["gender"].apply(gender_to_bool)
-    data["parental level of education"] = data["parental level of education"].apply(levelToNum)
+    data["parental level of education"] = data["parental level of education"].apply(level_to_num)
     data["race/ethnicity"] = data["race/ethnicity"].apply(race_to_num)
     data["test preparation course"] = data["test preparation course"].apply(course_to_bool)
     data["total score"] = data['math score'] + data['reading score'] + data['writing score']
-    return data[names], data['total score'], data
+    return data[["gender", "race/ethnicity", "parental level of education", "lunch", "test preparation course"]], data['total score'], data

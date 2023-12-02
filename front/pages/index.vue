@@ -5,22 +5,22 @@
                 Данные об учениках
             </v-card-title>
             <v-card-text>
-                <p class="text--primary"> Минимальная сумма быллов: {{ stat.min }}</p>
+                <p class="text--primary"> Минимальная сумма баллов: {{ stat.min }}</p>
             </v-card-text>
             <v-card-text>
-                <p class="text--primary"> Максимальная сумма быллов: {{ stat.max }}</p>
+                <p class="text--primary"> Максимальная сумма баллов: {{ stat.max }}</p>
             </v-card-text>
             <v-card-text>
-                <p class="text--primary"> Средняя сумма быллов: {{ stat.average }}</p>
+                <p class="text--primary"> Средняя сумма баллов: {{ stat.average }}</p>
             </v-card-text>
             <v-card-text>
-                <p class="text--primary"> Медианная сумма быллов: {{ stat.median }}</p>
+                <p class="text--primary"> Медианная сумма баллов: {{ stat.median }}</p>
             </v-card-text>
         </PageLayout>
     </div>
 </template>
 <script>
-import PageLayout from "@/components/PageLayout"
+import PageLayout from "~/components/PageLayout.vue"
 export default {
     components: {
         PageLayout,
@@ -44,5 +44,5 @@ export default {
 }
 </script>
 <style lang="">
-    
+
 </style>

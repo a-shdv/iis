@@ -1,5 +1,5 @@
 import numpy as np
-from bringingData import bring
+from converter import convert_all_to_num
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_percentage_error
@@ -8,10 +8,11 @@ import statistics
 from sklearn.neural_network import MLPRegressor
 from sklearn.tree import DecisionTreeRegressor
 from collections import Counter
-from config import names
-x, y, data = bring()
 
-#section tree class
+x, y, data = convert_all_to_num()
+names = ["gender", "race/ethnicity", "parental level of education", "lunch", "test preparation course"]
+
+# section tree class
 
 def get_score():
     clf = DecisionTreeRegressor(random_state=241)
@@ -25,7 +26,7 @@ def get_score():
     tree_error = mean_absolute_percentage_error(np.array(y_test), tree_predict)
 
     mlp = MLPRegressor(max_iter=2000, n_iter_no_change=20,
-                        activation='relu', alpha=0.01, hidden_layer_sizes=[100], tol=0.0000001)
+                       activation='relu', alpha=0.01, hidden_layer_sizes=[100], tol=0.0000001)
     mlp.fit(x_train, y_train)
     mlp_predict = mlp.predict(x_test)
     mlp_error = mean_absolute_percentage_error(np.array(y_test), mlp_predict)
@@ -40,15 +41,17 @@ def get_score():
         'reg': reg_error
     }
 
-#section params
+
+# section params
 def get_params():
-    average = sum(y)/len(y)
+    average = sum(y) / len(y)
     min_val = min(y)
     max_val = max(y)
     median = statistics.median(y)
     return {'average': average, 'min': min_val, 'max': max_val, 'median': median}
 
-#section predict
+
+# section predict
 
 def calculate_class():
     kmeans = KMeans(n_clusters=3)
@@ -79,7 +82,6 @@ def calculate_class():
         else:
             kmeans_dict[key] = "Средний класс"
     # print(kmeans_dict)
-
 
     agg_clust.fit(corr.values)
     all_predict_agg = agg_clust.fit_predict(corr.values)
@@ -124,4 +126,3 @@ def calculate_class():
         }
     }
     return res
-
