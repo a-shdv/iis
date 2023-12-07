@@ -23,14 +23,13 @@ def get_params():
     values_above_median = sum(1 for value in y if value > median_stat)
     values_below_median = sum(1 for value in y if value < median_stat)
 
-    print(f"Количество значений выше медианы: {values_above_median}")
-    print(f"Количество значений ниже медианы: {values_below_median}")
-
     return {
         'average': average_stat,
         'min': min_val_stat,
         'max': max_val_stat,
-        'median': median_stat
+        'median': median_stat,
+        'values_above_median': values_above_median,
+        'values_below_median': values_below_median
     }
 
 
@@ -140,9 +139,11 @@ def calculate_class():
             'stat': {
                 '0': counter_means[0],
                 '1': counter_means[1],
-                '2': counter_means[2],
-                'medians': kmeans_medians
-            }
+                '2': counter_means[2]
+            },
+            'kmeans_medians': kmeans_medians,
+            'kmeans_above_median': kmeans_above_median,
+            'kmeans_below_median': kmeans_below_median
         },
         'agg': {
             'dict': agg_clust_dict,
@@ -150,8 +151,10 @@ def calculate_class():
                 '0': counter_agg[0],
                 '1': counter_agg[1],
                 '2': counter_agg[2],
-                'medians': agg_clust_medians
-            }
+            },
+            'agg_clust_medians': agg_clust_medians,
+            'agg_clust_above_median': agg_clust_above_median,
+            'agg_clust_below_median': agg_clust_below_median
         }
     }
     return res
