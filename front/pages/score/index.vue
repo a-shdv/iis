@@ -41,9 +41,6 @@ export default {
                 this.value = [...this.value, value]
                 this.labels = [...this.labels, `${key} ${(value * 100).toFixed(2)}%`]
             }
-            console.log(this.value);
-            console.log(this.labels);
-            console.log(data);
         }).catch(err => console.log(err))
     },
     components: {

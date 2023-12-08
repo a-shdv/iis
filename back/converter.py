@@ -1,5 +1,9 @@
 import pandas as pd
 
+from sklearn.preprocessing import StandardScaler
+
+scaler = StandardScaler()
+
 
 def gender_to_bool(gender):
     if gender == "male":
@@ -55,4 +59,17 @@ def convert_all_to_num():
     data["race/ethnicity"] = data["race/ethnicity"].apply(race_to_num)
     data["test preparation course"] = data["test preparation course"].apply(course_to_bool)
     data["total score"] = data['math score'] + data['reading score'] + data['writing score']
-    return data[["gender", "race/ethnicity", "parental level of education", "lunch", "test preparation course"]], data['total score'], data
+
+    # Вычисляем стандартное отклонение
+    std_dev = data['total score'].std()
+
+    # Определяем границы для выбросов (например, 3 стандартных отклонения от среднего)
+    lower_bound = data['total score'].mean() - 1.5 * std_dev
+    upper_bound = data['total score'].mean() + 1.5 * std_dev
+
+    # Фильтруем данные, исключая выбросы
+    filtered_data = data[(data['total score'] >= lower_bound) & (data['total score'] <= upper_bound)]
+
+    return filtered_data[
+        ["gender", "race/ethnicity", "parental level of education", "lunch", "test preparation course"]], \
+        filtered_data['total score'], filtered_data

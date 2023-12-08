@@ -5,6 +5,8 @@
         <h1 style="color: #00DC82">Классификация</h1>
       </v-card-title>
       <v-card-text>
+        <h1>Данные о минимальных, максимальных, средних значениях</h1>
+        <br>
         <h2>Агломеративная кластеризация - 1</h2>
         <h2>K-средних - 2</h2>
       </v-card-text>
@@ -15,6 +17,7 @@
                    :label-size="5">
       </v-sparkline>
 
+      <h1>Данные о медианных значениях</h1>
       <v-card-text v-for="(cluster, index) in clusters" :key="index">
         <h2>{{ dict[cluster] }}: {{ values_above_median }}</h2>
 
@@ -26,7 +29,6 @@
             <li><h4 style="font-size: 20px">kmeans_below_median: {{ kmeans_clust_below_median }}</h4></li>
           </ul>
         </template>
-
         <!-- Agglomerative Clustering values -->
         <template v-else-if="cluster === 'agg'">
           <ul>
