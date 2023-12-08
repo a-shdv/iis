@@ -21,9 +21,9 @@
         <!-- K-Means values -->
         <template v-if="cluster === 'kmeans'">
           <ul>
-            <li><h4 style="font-size: 20px">kmeans_medians: {{ kmeans_medians }}</h4></li>
-            <li><h4 style="font-size: 20px">kmeans_above_median: {{ kmeans_above_median }}</h4></li>
-            <li><h4 style="font-size: 20px">kmeans_below_median: {{ kmeans_below_median }}</h4></li>
+            <li><h4 style="font-size: 20px">kmeans_medians: {{ kmeans_clust_medians }}</h4></li>
+            <li><h4 style="font-size: 20px">kmeans_above_median: {{ kmeans_clust_above_median }}</h4></li>
+            <li><h4 style="font-size: 20px">kmeans_below_median: {{ kmeans_clust_below_median }}</h4></li>
           </ul>
         </template>
 
@@ -68,7 +68,7 @@ export default {
         this.value = [...this.value, ...Object.values(value.stat)]
         this.labels = [...this.labels, ...concatenatedArray.flatMap(obj => {
           // Exclude specific values from labels
-          if (obj.title !== 'kmeans_medians' && obj.title !== 'kmeans_above_median' && obj.title !== 'kmeans_below_median' && obj.title !== 'agg_clust_medians' && obj.title !== 'agg_clust_above_median' && obj.title !== 'agg_clust_below_median') {
+          if (obj.title !== 'kmeans_clust_medians' && obj.title !== 'kmeans_clust_above_median' && obj.title !== 'kmeans_clust_below_median' && obj.title !== 'agg_clust_medians' && obj.title !== 'agg_clust_above_median' && obj.title !== 'agg_clust_below_median') {
             return `${obj.title}: ${obj.value}`;
           }
           return [];
@@ -76,19 +76,13 @@ export default {
       }
 
       // Set the calculated values to data properties
-      this.kmeans_medians = data.kmeans.kmeans_medians;
-      this.kmeans_above_median = data.kmeans.kmeans_above_median;
-      this.kmeans_below_median = data.kmeans.kmeans_below_median;
-      console.log(this.kmeans_medians)
-      console.log(this.kmeans_above_median)
-      console.log(this.kmeans_below_median)
+      this.kmeans_clust_medians = data.kmeans.kmeans_clust_medians;
+      this.kmeans_clust_above_median = data.kmeans.kmeans_clust_above_median;
+      this.kmeans_clust_below_median = data.kmeans.kmeans_clust_below_median;
 
       this.agg_clust_medians = data.agg.agg_clust_medians;
       this.agg_clust_above_median = data.agg.agg_clust_above_median;
       this.agg_clust_below_median = data.agg.agg_clust_below_median;
-      console.log(this.agg_clust_medians)
-      console.log(this.agg_clust_above_median)
-      console.log(this.agg_clust_above_median)
 
     }).catch(err => console.log(err))
   },
@@ -113,9 +107,9 @@ export default {
       value: [],
       labels: [],
       clusters: [],
-      kmeans_medians: 0,
-      kmeans_above_median: 0,
-      kmeans_below_median: 0,
+      kmeans_clust_medians: 0,
+      kmeans_clust_above_median: 0,
+      kmeans_clust_below_median: 0,
       agg_clust_medians: 0,  // Initialize to default value
       agg_clust_above_median: 0,
       agg_clust_below_median: 0,

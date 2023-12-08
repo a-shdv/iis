@@ -19,7 +19,6 @@ def get_params():
     max_val_stat = max(y)
     median_stat = statistics.median(y)
 
-    # Найти количество значений выше и ниже median_stat
     values_above_median = sum(1 for value in y if value > median_stat)
     values_below_median = sum(1 for value in y if value < median_stat)
 
@@ -100,13 +99,13 @@ def calculate_class():
 
     # K-Means
     # kmeans_values = [data.values[i][8] for i in range(len(all_predict_kmeans))]
-    # kmeans_medians = np.median(kmeans_values)
+    # kmeans_clust_medians = np.median(kmeans_values)
 
     # # Agglomerative Clustering
     # agg_clust_values = [data.values[i][8] for i in range(len(all_predict_agg))]
     # agg_clust_medians = np.median(agg_clust_values)
 
-    kmeans_medians = np.median(
+    kmeans_clust_medians = np.median(
         [data.values[i][8] for i in range(len(all_predict_kmeans)) if all_predict_kmeans[i] == 0]) + np.median(
         [data.values[i][8] for i in range(len(all_predict_kmeans)) if all_predict_kmeans[i] == 1]) + np.median(
         [data.values[i][8] for i in range(len(all_predict_kmeans)) if all_predict_kmeans[i] == 2])
@@ -118,20 +117,11 @@ def calculate_class():
         [data.values[i][8] for i in range(len(all_predict_agg)) if all_predict_agg[i] == 1]) + np.median(
         [data.values[i][8] for i in range(len(all_predict_agg)) if all_predict_agg[i] == 2])
 
-    kmeans_above_median = sum(1 for value in range(len(all_predict_kmeans)) if value > kmeans_medians)
-    kmeans_below_median = sum(1 for value in range(len(all_predict_kmeans)) if value < kmeans_medians)
+    kmeans_clust_above_median = sum(1 for value in range(len(all_predict_kmeans)) if value > kmeans_clust_medians)
+    kmeans_clust_below_median = sum(1 for value in range(len(all_predict_kmeans)) if value < kmeans_clust_medians)
 
     agg_clust_above_median = sum(1 for value in range(len(all_predict_agg)) if value > agg_clust_medians)
     agg_clust_below_median = sum(1 for value in range(len(all_predict_agg)) if value < agg_clust_medians)
-
-    # Print the results
-    print("K-Means:")
-    print("Above Median:", kmeans_above_median)
-    print("Below Median:", kmeans_below_median)
-
-    print("\nAgglomerative Clustering:")
-    print("Above Median:", agg_clust_above_median)
-    print("Below Median:", agg_clust_below_median)
 
     res = {
         'kmeans': {
@@ -141,9 +131,9 @@ def calculate_class():
                 '1': counter_means[1],
                 '2': counter_means[2]
             },
-            'kmeans_medians': kmeans_medians,
-            'kmeans_above_median': kmeans_above_median,
-            'kmeans_below_median': kmeans_below_median
+            'kmeans_clust_medians': kmeans_clust_medians,
+            'kmeans_clust_above_median': kmeans_clust_above_median,
+            'kmeans_clust_below_median': kmeans_clust_below_median
         },
         'agg': {
             'dict': agg_clust_dict,

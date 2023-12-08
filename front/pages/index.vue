@@ -11,10 +11,14 @@
             <li><h4>Минимальная сумма баллов: {{ stat.min }}</h4></li>
             <li><h4>Максимальная сумма баллов: {{ stat.max }}</h4></li>
             <li><h4>Средняя сумма баллов: {{ stat.average }}</h4></li>
+
+          </ul>
+          <br>
+        <h2 class="mb-4" style="font-size: 24px;">Дополнительная статистика</h2>
+          <ul>
             <li><h4>Медианная сумма баллов: {{ stat.median }}</h4></li>
             <li><h4>Количество студентов выше медианы:  {{ stat.values_above_median }}</h4></li>
             <li><h4>Количество студентов ниже медианы:  {{ stat.values_below_median }}</h4></li>
-
           </ul>
         </div>
       </v-card-text>
