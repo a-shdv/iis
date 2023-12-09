@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-from converter import convert_all_to_num
+from converter import convert_all_to_num_and_filter_data
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_percentage_error
@@ -13,10 +13,9 @@ from collections import Counter
 
 from sklearn.preprocessing import StandardScaler
 
-scaler = StandardScaler()
-
-x, y, data = convert_all_to_num()
+x, y, data = convert_all_to_num_and_filter_data()
 names = ["gender", "race/ethnicity", "parental level of education", "lunch", "test preparation course"]
+
 
 # y = y.rolling(window=3).mean().dropna()  # метод скользящего среднего
 
@@ -45,10 +44,6 @@ def get_params():
     near_min = sum(1 for score in y if min_threshold_low <= score <= min_threshold_high)
     near_max = sum(1 for score in y if max_threshold_low <= score <= max_threshold_high)
     near_avg = sum(1 for score in y if avg_threshold_low <= score <= avg_threshold_high)
-
-    print(near_min)
-    print(near_max)
-    print(near_avg)
 
     return {
         'average': '{:.2f}'.format(average_stat),
@@ -99,6 +94,15 @@ def calculate_class():
     # print(kmeans_dict)
     counter_means = Counter(all_predict_kmeans)
 
+    # Вычисление значений выше медианы и ниже медианы
+    kmeans_clust_medians = np.median(
+        [data.values[i][8] for i in range(len(all_predict_kmeans)) if all_predict_kmeans[i] == 0]) + np.median(
+        [data.values[i][8] for i in range(len(all_predict_kmeans)) if all_predict_kmeans[i] == 1]) + np.median(
+        [data.values[i][8] for i in range(len(all_predict_kmeans)) if all_predict_kmeans[i] == 2])
+
+    kmeans_clust_above_median = sum(1 for value in range(len(all_predict_kmeans)) if value > kmeans_clust_medians)
+    kmeans_clust_below_median = sum(1 for value in range(len(all_predict_kmeans)) if value < kmeans_clust_medians)
+
     # Агломеративная кластеризация
     agg_clust = AgglomerativeClustering(n_clusters=3)
     agg_clust_dict = {}
@@ -127,15 +131,6 @@ def calculate_class():
         else:
             agg_clust_dict[key] = "Хорошисты"
     counter_agg = Counter(all_predict_agg)
-
-    # Вычисление значений выше медианы и ниже медианы
-    kmeans_clust_medians = np.median(
-        [data.values[i][8] for i in range(len(all_predict_kmeans)) if all_predict_kmeans[i] == 0]) + np.median(
-        [data.values[i][8] for i in range(len(all_predict_kmeans)) if all_predict_kmeans[i] == 1]) + np.median(
-        [data.values[i][8] for i in range(len(all_predict_kmeans)) if all_predict_kmeans[i] == 2])
-
-    kmeans_clust_above_median = sum(1 for value in range(len(all_predict_kmeans)) if value > kmeans_clust_medians)
-    kmeans_clust_below_median = sum(1 for value in range(len(all_predict_kmeans)) if value < kmeans_clust_medians)
 
     agg_clust_medians = np.median(
         [data.values[i][8] for i in range(len(all_predict_agg)) if all_predict_agg[i] == 0]) + np.median(
@@ -194,6 +189,7 @@ def get_score():
     reg.fit(x_train, y_train)
     reg_predict = reg.predict(x_test)
     reg_error = mean_absolute_percentage_error(y_true=y_test, y_pred=reg_predict)
+    
     return {
         'mlp': mlp_error,
         'tree': tree_error,

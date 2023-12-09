@@ -51,7 +51,7 @@ def total_score(math, read, write):
     return math + read + write
 
 
-def convert_all_to_num():
+def convert_all_to_num_and_filter_data():
     data = pd.read_csv('students-performance.csv')
     data["lunch"] = data["lunch"].apply(launch_to_bool)
     data["gender"] = data["gender"].apply(gender_to_bool)
@@ -72,4 +72,4 @@ def convert_all_to_num():
 
     return filtered_data[
         ["gender", "race/ethnicity", "parental level of education", "lunch", "test preparation course"]], \
-        filtered_data['total score'], filtered_data
+        filtered_data['total score'].dropna(), filtered_data
